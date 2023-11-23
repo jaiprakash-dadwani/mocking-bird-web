@@ -9,7 +9,7 @@ export default function RulesHome() {
     return (
         <>
             <Header />
-            <div className="flex flex-row w-full space-x-4 m-4">
+            <div className="flex flex-col w-full m-4 space-y-4">
                 <ExistingRules />
                 <AddRule />
             </div>

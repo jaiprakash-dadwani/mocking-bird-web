@@ -4,7 +4,7 @@ export interface Condition {
 }
 
 export interface Rule {
-    ruleId: string,
+    ruleId?: string,
     sourceApplication: string,
     apiMethod: string,
     apiUrl: string,

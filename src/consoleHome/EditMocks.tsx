@@ -7,7 +7,7 @@ export default function EditMocks() {
     }
     return (
         <button
-            className="mt-4"
+            className=""
             onClick={onClick}
         >
             Add / Edit Mocking Rules

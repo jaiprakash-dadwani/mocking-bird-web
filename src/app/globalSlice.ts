@@ -4,6 +4,7 @@ import {get, patch} from "../api/api.ts";
 import {ENDPOINTS} from "../constants.ts";
 import {Rule} from "../model/RulesModels.ts";
 import {History} from "../model/ConsoleModels.ts";
+import {getHistory, getRuleList} from "../MockData.ts";
 
 export interface GlobalState {
     isLoading: boolean;
@@ -18,9 +19,9 @@ const initialState: GlobalState = {
     isLoading: false,
     appSource: ["gpl-bff", "lending-adaptor", "gpl-payment-adaptor"],
     endPoint: undefined,
-    rulesList: [],
+    rulesList: getRuleList(),
     currentRule: {},
-    history: [],
+    history: getHistory(),
 };
 
 export const globalSlice = createSlice({
