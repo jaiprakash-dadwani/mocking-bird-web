@@ -9,7 +9,7 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
         <div className="grid grid-cols-9 space-x-6 m-2">
             <div className="col-span-1" key="ruleId-title">{index+1}</div>
             <div className="col-span-1" key="ruleId-title">{data.apiMethod}</div>
-            <div className="col-span-1" key="req-title">{data.response}</div>
+            <div className="col-span-1" key="req-title">{data.conditions[0]?.conditionValue}</div>
             <div className="col-span-3" key="res-title"></div>
             <div className="col-span-2 flex flex-row" key="conflict-title">
                 <button className="bg-white w-8"><img src={editIcon} alt="edit"/></button>
