@@ -34,9 +34,10 @@ export default function RuleResponse() {
 
         const handleSave = () => {
             const newConditions: Condition[] = [];
+            console.log("rulesData---", rulesData);
             if (!rulesData) return;
 
-            rulesData.forEach((data) => {
+            Object.values(rulesData).forEach((data) => {
                 if (data.condition && data.value) {
                     newConditions.push({
                         conditionName: data.condition,
@@ -48,9 +49,9 @@ export default function RuleResponse() {
             const newRule: Rule = {
                 sourceApplication: source || '',
                 apiMethod: rulesData[0]?.method || "GET",
-                apiUrl: rulesData[0]?.value || '',
                 conditions: newConditions,
-                enable: true,
+                ruleEnabled: true,
+                response: responseData.responseBody
             }
             dispatch(patchRule(newRule));
         }

@@ -14,7 +14,7 @@ export interface GlobalState {
     rulesList: Rule[],
     currentRule: Partial<Rule>,
     history: History[],
-    currentRuleData: Partial<RuleData>[],
+    currentRuleData: RuleData[],
 }
 
 const initialState: GlobalState = {
@@ -43,7 +43,7 @@ export const globalSlice = createSlice({
         setCurrentRule: (state, action: PayloadAction<Partial<Rule>>) => {
             state.currentRule = {...state.currentRule, ...action.payload};
         },
-        setCurrentRuleData: (state, action: PayloadAction<Partial<RuleData>[]>) => {
+        setCurrentRuleData: (state, action: PayloadAction<RuleData[]>) => {
             state.currentRuleData = {...state.currentRuleData, ...action.payload};
         },
         setHistory: (state, action: PayloadAction<History[]>) => {

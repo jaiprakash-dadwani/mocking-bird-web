@@ -14,12 +14,17 @@ export default function AddRule() {
 
     const handleChange = (key: string, value: string, index: number) => {
         if (ruleData.length > index) {
-            const data: RuleData[] = [];
-            const newData = data.concat([...ruleData]);
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            newData[index][key] = value;
+            // const data: RuleData[] = [];
+            const newData = ruleData;
+            if (key === 'condition') {
+                newData[index] = {...newData[index], condition: value};
+            } else if (key === 'method') {
+                newData[index] = {...newData[index], method: value};
+            } else if (key === 'value') {
+                newData[index] = {...newData[index], value: value};
+            }
             setRuleData(newData);
+            dispatch(setCurrentRuleData(ruleData));
         }
     }
 
@@ -29,7 +34,7 @@ export default function AddRule() {
         newData.splice(index, 1);
         setRuleData(newData);
     }
-
+    console.log(ruleData);
     return (
         <div className="flex flex-col bg-stone-100 text-stone-900 p-4">
             <div className="text-3xl mb-2" key="title">Add new rule</div>
