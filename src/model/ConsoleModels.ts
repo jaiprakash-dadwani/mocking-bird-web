@@ -1,7 +1,7 @@
 export interface History {
     id: string,
-    conflictingRuleIs: string[],
-    ResponseRuleId: string,
+    matchingRules: string,
+    responseRuleId: number,
     request: string,
     response: string,
     sourceApplication: string

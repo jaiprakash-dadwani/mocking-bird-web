@@ -123,8 +123,8 @@ export const fetchHistoryForSource = createAsyncThunk(
     async (source: string, { dispatch }) => {
         dispatch(setIsLoading(true));
         try {
-            const data = await get<string[]>(`${ENDPOINTS.HISTORY}?source_application=${source}`);
-            dispatch(setAppSource(data));
+            const data = await get<History[]>(`${ENDPOINTS.HISTORY}?source_application=${source}`);
+            dispatch(setHistory(data));
         } catch (err) {
             console.log('api error', err);
         } finally {
