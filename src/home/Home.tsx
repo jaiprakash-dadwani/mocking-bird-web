@@ -37,6 +37,7 @@ function Home() {
                         setError(!e);
                         setEndpoint(e);
                     }}
+                    placeholder="Please select the service"
                     options={dropDownOptions}
                     defaultValue={selectedEndPoint}
                     data-testid="method"
