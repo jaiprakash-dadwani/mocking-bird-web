@@ -91,7 +91,7 @@ export default function RuleResponse() {
                     defaultValue={responseData.headers}
                 />
                 <textarea
-                    onChange={(val) => handleChange('body', val.target.value)}
+                    onChange={(val) => handleChange('responseBody', val.target.value)}
                     className="col-span-3 px-2"
                     placeholder=""
                     defaultValue={responseData.responseBody}
