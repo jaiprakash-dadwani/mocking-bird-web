@@ -34,6 +34,7 @@ export default function RuleResponse() {
 
         const handleSave = () => {
             const newConditions: Condition[] = [];
+            if (!rulesData) return;
 
             rulesData.forEach((data) => {
                 if (data.condition && data.value) {

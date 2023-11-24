@@ -28,10 +28,11 @@ export let STORED_RULES: Rule[] = [{
     }]
 
 export function getRuleList() {
+    console.log(STORED_RULES);
     return STORED_RULES
 }
 
-export function patchRule(rule: Rule) {
+export function patchNewRule(rule: Rule) {
     if (rule.ruleId) {
         const index = STORED_RULES.findIndex((oldRule) => oldRule.ruleId === rule.ruleId);
         STORED_RULES = STORED_RULES.splice(index, 1);

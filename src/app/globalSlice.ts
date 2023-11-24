@@ -5,6 +5,7 @@ import {ENDPOINTS} from "../constants.ts";
 import {Rule} from "../model/RulesModels.ts";
 import {History} from "../model/ConsoleModels.ts";
 import {RuleData} from "../rules/RuleRows.tsx";
+import {getHistory, getRuleList, patchNewRule} from "../MockData.ts";
 
 export interface GlobalState {
     isLoading: boolean;
@@ -20,9 +21,9 @@ const initialState: GlobalState = {
     isLoading: false,
     appSource: ["gpl-bff", "lending-adaptor", "gpl-payment-adaptor"],
     endPoint: undefined,
-    rulesList: [],
+    rulesList: getRuleList(),
     currentRule: {},
-    history: [],
+    history: getHistory(),
     currentRuleData: [],
 };
 
@@ -106,6 +107,8 @@ export const patchRule = createAsyncThunk(
             await patch<string[]>(ENDPOINTS.RULES_LIST, {
                 data: {rule},
             });
+            patchNewRule(rule);
+            dispatch(setRulesList(getRuleList()));
         } catch (err) {
             console.log('api error', err);
         } finally {
