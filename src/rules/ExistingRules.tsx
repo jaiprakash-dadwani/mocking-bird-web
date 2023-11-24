@@ -30,8 +30,8 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
             <div className="col-span-3" key="req-title">{data.response}</div>
             {isEdit && <input type="text" defaultValue={data.response} className="col-span-3" onChange={(e) => setTextValue(e.target.value)}></input>}
             <div className="col-span-1 flex flex-row" key="conflict-title">
-                <button className="bg-white w-8" onClick={handleClick}><img src={isEdit ? tickIcon : editIcon} alt="edit"/></button>
-                <button className="bg-white w-8" onClick={handleEnable}><img src={data.ruleEnabled ? toggleOn : toggleOff} alt="enable"/></button>
+                <button className="bg-white w-10" onClick={handleClick}><img src={isEdit ? tickIcon : editIcon} alt="edit"/></button>
+                <button className="bg-white w-16" onClick={handleEnable}><img src={data.ruleEnabled ? toggleOn : toggleOff} alt="enable"/></button>
             </div>
         </div>
     )
