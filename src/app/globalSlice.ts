@@ -5,7 +5,7 @@ import {ENDPOINTS} from "../constants.ts";
 import {Rule} from "../model/RulesModels.ts";
 import {History} from "../model/ConsoleModels.ts";
 import {RuleData} from "../rules/RuleRows.tsx";
-import {getHistory, getRuleList, patchNewRule} from "../MockData.ts";
+import {getHistory} from "../MockData.ts";
 
 export interface GlobalState {
     isLoading: boolean;
@@ -105,10 +105,9 @@ export const patchRule = createAsyncThunk(
         dispatch(setIsLoading(true));
         try {
             await patch<string[]>(ENDPOINTS.PATCH_RULE, {
-                data: {rule},
+                data: {...rule},
             });
-            patchNewRule(rule);
-            dispatch(setRulesList(getRuleList()));
+            dispatch(fetchRulesBySource(rule.sourceApplication));
         } catch (err) {
             console.log('api error', err);
         } finally {
