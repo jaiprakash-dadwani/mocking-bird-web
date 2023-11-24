@@ -104,7 +104,7 @@ export const patchRule = createAsyncThunk(
     async (rule: Rule, { dispatch }) => {
         dispatch(setIsLoading(true));
         try {
-            await patch<string[]>(ENDPOINTS.RULES_LIST, {
+            await patch<string[]>(ENDPOINTS.PATCH_RULE, {
                 data: {rule},
             });
             patchNewRule(rule);
