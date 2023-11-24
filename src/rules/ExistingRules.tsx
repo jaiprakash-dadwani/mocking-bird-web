@@ -3,6 +3,8 @@ import {fetchRulesBySource, patchRule, selectEndpoint, selectRulesList} from "..
 import {Rule} from "../model/RulesModels.ts";
 import editIcon from '../assets/edit.svg';
 import tickIcon from '../assets/check.svg';
+import toggleOn from '../assets/toggle_on.svg';
+import toggleOff from '../assets/toggle_off.svg';
 
 import {useEffect, useState} from "react";
 
@@ -16,6 +18,10 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
         setEdit(!isEdit)
     }
 
+    const handleEnable = () => {
+        dispatch(patchRule({...data, ruleEnabled: !data.ruleEnabled}))
+    }
+
     return (
         <div className={`grid ${isEdit ? "grid-cols-11" : "grid-cols-8"} space-x-6 m-2`}>
             <div className="col-span-1" key="ruleId-title">{index+1}</div>
@@ -25,6 +31,7 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
             {isEdit && <input type="text" defaultValue={data.response} className="col-span-3" onChange={(e) => setTextValue(e.target.value)}></input>}
             <div className="col-span-1 flex flex-row" key="conflict-title">
                 <button className="bg-white w-8" onClick={handleClick}><img src={isEdit ? tickIcon : editIcon} alt="edit"/></button>
+                <button className="bg-white w-8" onClick={handleEnable}><img src={data.ruleEnabled ? toggleOn : toggleOff} alt="enable"/></button>
             </div>
         </div>
     )
