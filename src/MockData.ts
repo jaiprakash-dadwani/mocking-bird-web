@@ -5,7 +5,6 @@ export let STORED_RULES: Rule[] = [{
     ruleId: 'randomId1',
     sourceApplication: "gpl-bff",
     apiMethod: "GET",
-    apiUrl: "/balance",
     conditions: [{
         conditionName: "PATH_STARTS_WITH",
         conditionValue: "/balance"
@@ -13,18 +12,19 @@ export let STORED_RULES: Rule[] = [{
         conditionName: "BODY_MATCHES",
         conditionValue: "{'id': 123456}"
     }],
-    enable: true,
+    response: '',
+    ruleEnabled: true,
 },
     {
         ruleId: 'randomId3',
         sourceApplication: "gpl-bff",
         apiMethod: "PATCH",
-        apiUrl: "/order",
         conditions: [{
             conditionName: "BODY_MATCHES",
             conditionValue: "{'id': 123456}"
         }],
-        enable: true,
+        response: '',
+        ruleEnabled: true,
     }]
 
 export function getRuleList() {
@@ -46,15 +46,15 @@ export function patchNewRule(rule: Rule) {
 export function getHistory(): History[] {
     return [{
         id: 'string1',
-        conflictingRuleIs: ['randomId1', 'randomId3'],
-        ResponseRuleId: 'randomId1',
+        matchingRules: 'randomId1',
+        responseRuleId: 1,
         request: "{application-type: 'application/json'}",
         response: "{success: true, data: {text: 'Awesome demo'}}",
         sourceApplication: 'gpl-bff',
     },{
             id: 'string2',
-            conflictingRuleIs: [],
-            ResponseRuleId: 'randomId3',
+            matchingRules: '',
+            responseRuleId: 2,
             request: "{}",
             response: "{success: true, data: {balance: 'Not enough to show'}}",
             sourceApplication: 'gpl-bff',
