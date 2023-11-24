@@ -1,7 +1,8 @@
-import {useAppSelector} from "../app/hooks.ts";
-import {selectRulesList} from "../app/globalSlice.ts";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import {fetchRulesBySource, selectEndpoint, selectRulesList} from "../app/globalSlice.ts";
 import {Rule} from "../model/RulesModels.ts";
 import editIcon from '../assets/edit.svg';
+import {useEffect} from "react";
 
 function ExistingRule({data, index}: {data: Rule, index: number}) {
     return (
@@ -19,6 +20,13 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
 
 export default function ExistingRules() {
     const rulesList = useAppSelector(selectRulesList);
+    const dispatch = useAppDispatch();
+    const source = useAppSelector(selectEndpoint) || '';
+
+    useEffect(() => {
+        dispatch(fetchRulesBySource(source));
+    }, [dispatch, source]);
+
     return (
         <div>
             <div className="mr-6"></div>

@@ -4,7 +4,6 @@ import {get, patch} from "../api/api.ts";
 import {ENDPOINTS} from "../constants.ts";
 import {Rule} from "../model/RulesModels.ts";
 import {History} from "../model/ConsoleModels.ts";
-import {getHistory, getRuleList} from "../MockData.ts";
 import {RuleData} from "../rules/RuleRows.tsx";
 
 export interface GlobalState {
@@ -21,9 +20,9 @@ const initialState: GlobalState = {
     isLoading: false,
     appSource: ["gpl-bff", "lending-adaptor", "gpl-payment-adaptor"],
     endPoint: undefined,
-    rulesList: getRuleList(),
+    rulesList: [],
     currentRule: {},
-    history: getHistory(),
+    history: [],
     currentRuleData: [],
 };
 
@@ -89,9 +88,7 @@ export const fetchRulesBySource = createAsyncThunk(
     async (source: string, { dispatch }) => {
         dispatch(setIsLoading(true));
         try {
-            const data = await get<Rule[]>(ENDPOINTS.RULES_LIST, {
-                headers: { 'application-source': source },
-            });
+            const data = await get<Rule[]>(`${ENDPOINTS.RULES_LIST}?source_application=${source}`);
             dispatch(setRulesList(data));
         } catch (err) {
             console.log('api error', err);
@@ -123,9 +120,7 @@ export const fetchHistoryForSource = createAsyncThunk(
     async (source: string, { dispatch }) => {
         dispatch(setIsLoading(true));
         try {
-            const data = await get<string[]>(ENDPOINTS.RULES_LIST, {
-                headers: { 'application-source': source },
-            });
+            const data = await get<string[]>(`${ENDPOINTS.HISTORY}?source_application=${source}`);
             dispatch(setAppSource(data));
         } catch (err) {
             console.log('api error', err);
