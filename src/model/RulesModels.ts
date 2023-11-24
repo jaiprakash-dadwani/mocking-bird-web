@@ -7,7 +7,7 @@ export interface Rule {
     ruleId?: string,
     sourceApplication: string,
     apiMethod: string,
-    apiUrl: string,
+    response: string,
     conditions: Condition[],
-    enable: boolean,
+    ruleEnabled: boolean,
 }

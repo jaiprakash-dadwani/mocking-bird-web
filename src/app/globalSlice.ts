@@ -21,7 +21,7 @@ const initialState: GlobalState = {
     isLoading: false,
     appSource: ["gpl-bff", "lending-adaptor", "gpl-payment-adaptor"],
     endPoint: undefined,
-    rulesList: getRuleList(),
+    rulesList: [],
     currentRule: {},
     history: getHistory(),
     currentRuleData: [],
@@ -89,7 +89,7 @@ export const fetchRulesBySource = createAsyncThunk(
     async (source: string, { dispatch }) => {
         dispatch(setIsLoading(true));
         try {
-            const data = await get<Rule[]>(`${ENDPOINTS.RULES_LIST}?source_application=${source}`);
+            const data = await get<Rule[]>(`${ENDPOINTS.RULES_LIST}?sourceApplication=${source}`);
             dispatch(setRulesList(data));
         } catch (err) {
             console.log('api error', err);
