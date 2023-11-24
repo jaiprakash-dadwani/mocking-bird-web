@@ -1,18 +1,30 @@
 import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
-import {fetchRulesBySource, selectEndpoint, selectRulesList} from "../app/globalSlice.ts";
+import {fetchRulesBySource, selectEndpoint, selectRulesList, setCurrentRule} from "../app/globalSlice.ts";
 import {Rule} from "../model/RulesModels.ts";
 import editIcon from '../assets/edit.svg';
-import {useEffect} from "react";
+import tickIcon from '../assets/check.svg';
+
+import {useEffect, useState} from "react";
 
 function ExistingRule({data, index}: {data: Rule, index: number}) {
+    const [isEdit, setEdit] = useState(false);
+    const [textValue, setTextValue] = useState('');
+    const dispatch = useAppDispatch();
+
+    const handleClick = () => {
+        if (isEdit) dispatch(setCurrentRule({...data, response: textValue || data.response}))
+        setEdit(!isEdit)
+    }
+
     return (
-        <div className="grid grid-cols-8 space-x-6 m-2">
+        <div className={`grid ${isEdit ? "grid-cols-11" : "grid-cols-8"} space-x-6 m-2`}>
             <div className="col-span-1" key="ruleId-title">{index+1}</div>
             <div className="col-span-1" key="ruleId-title">{data.apiMethod}</div>
-            <div className="col-span-2" key="req-title">{data.conditions[0]?.conditionValue}</div>
+            <div className="col-span-2" key="contition-title">{data.conditions[0]?.conditionValue}</div>
             <div className="col-span-3" key="req-title">{data.response}</div>
+            {isEdit && <input type="text" defaultValue={data.response} className="col-span-3" onChange={(e) => setTextValue(e.target.value)}></input>}
             <div className="col-span-1 flex flex-row" key="conflict-title">
-                <button className="bg-white w-8"><img src={editIcon} alt="edit"/></button>
+                <button className="bg-white w-8" onClick={handleClick}><img src={isEdit ? tickIcon : editIcon} alt="edit"/></button>
             </div>
         </div>
     )

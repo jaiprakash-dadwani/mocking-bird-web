@@ -9,7 +9,7 @@ export default function Header() {
             onClick={() => navigate('/')}
         >
             <img className="w-6 h-6 mr-4" src={icon} alt=""/>
-            <span>Mocking Bird</span>
+            <span>MockingBird</span>
         </button>
     )
 }

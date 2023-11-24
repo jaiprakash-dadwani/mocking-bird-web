@@ -12,7 +12,7 @@ export let STORED_RULES: Rule[] = [{
         conditionName: "BODY_MATCHES",
         conditionValue: "{'id': 123456}"
     }],
-    response: '',
+    response: '{}',
     ruleEnabled: true,
 },
     {
@@ -23,7 +23,7 @@ export let STORED_RULES: Rule[] = [{
             conditionName: "BODY_MATCHES",
             conditionValue: "{'id': 123456}"
         }],
-        response: '',
+        response: '{}',
         ruleEnabled: true,
     }]
 
