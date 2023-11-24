@@ -23,15 +23,15 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
     }
 
     return (
-        <div className={`grid ${isEdit ? "grid-cols-11" : "grid-cols-8"} space-x-6 m-2`}>
+        <div className={`grid ${isEdit ? "grid-cols-12" : "grid-cols-9"} space-x-6 m-2`}>
             <div className="col-span-1" key="ruleId-title">{index+1}</div>
             <div className="col-span-1" key="ruleId-title">{data.apiMethod}</div>
             <div className="col-span-2" key="contition-title">{data.conditions[0]?.conditionValue}</div>
             <div className="col-span-3" key="req-title">{data.response}</div>
             {isEdit && <input type="text" defaultValue={data.response} className="col-span-3" onChange={(e) => setTextValue(e.target.value)}></input>}
-            <div className="col-span-1 flex flex-row" key="conflict-title">
+            <div className="col-span-2 flex flex-row" key="conflict-title">
                 <button className="bg-white w-10" onClick={handleClick}><img src={isEdit ? tickIcon : editIcon} alt="edit"/></button>
-                <button className="bg-white w-16" onClick={handleEnable}><img src={data.ruleEnabled ? toggleOn : toggleOff} alt="enable"/></button>
+                <button className="bg-white w-24" onClick={handleEnable}><img src={data.ruleEnabled ? toggleOn : toggleOff} alt="enable"/></button>
             </div>
         </div>
     )
