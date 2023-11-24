@@ -1,7 +1,6 @@
 import {useAppSelector} from "../app/hooks.ts";
 import {selectRulesList} from "../app/globalSlice.ts";
 import {Rule} from "../model/RulesModels.ts";
-import deleteIcon from '../assets/delete.svg';
 import editIcon from '../assets/edit.svg';
 
 function ExistingRule({data, index}: {data: Rule, index: number}) {
@@ -13,7 +12,6 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
             <div className="col-span-3" key="res-title"></div>
             <div className="col-span-2 flex flex-row" key="conflict-title">
                 <button className="bg-white w-8"><img src={editIcon} alt="edit"/></button>
-                <button className="bg-white w-8"><img src={deleteIcon} alt="delete"/></button>
             </div>
         </div>
     )

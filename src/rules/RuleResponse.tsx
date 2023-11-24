@@ -1,4 +1,7 @@
 import {useState} from "react";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import {patchRule, selectEndpoint, selectRulesData} from "../app/globalSlice.ts";
+import {Condition, Rule} from "../model/RulesModels.ts";
 
 interface RuleResponseData {
     delay: string,
@@ -11,6 +14,9 @@ export default function RuleResponse() {
     const [responseData, setResponseData] = useState({
         delay: "0", httpCode: "200", headers: "{'Content-Type': 'application/json'}", responseBody: "{'status': 'success'}"
     });
+    const rulesData = useAppSelector(selectRulesData);
+    const source = useAppSelector(selectEndpoint);
+    const dispatch = useAppDispatch();
 
         const handleChange = (key: string, value: string) => {
             const newData: RuleResponseData = {
@@ -24,6 +30,28 @@ export default function RuleResponse() {
             newData[key] = value;
             console.log(newData);
             setResponseData(newData)
+        }
+
+        const handleSave = () => {
+            const newConditions: Condition[] = [];
+
+            rulesData.forEach((data) => {
+                if (data.condition && data.value) {
+                    newConditions.push({
+                        conditionName: data.condition,
+                        conditionValue: data.value
+                    });
+                }
+            })
+
+            const newRule: Rule = {
+                sourceApplication: source || '',
+                apiMethod: rulesData[0]?.method || "GET",
+                apiUrl: rulesData[0]?.value || '',
+                conditions: newConditions,
+                enable: true,
+            }
+            dispatch(patchRule(newRule));
         }
 
         return (
@@ -70,8 +98,7 @@ export default function RuleResponse() {
             <div className="w-full flex pt-10 justify-center items-center">
                 <button
                     className=""
-                    onClick={() => {
-                    }}
+                    onClick={handleSave}
                 >
                     Save Rule
                 </button>

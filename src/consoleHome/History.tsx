@@ -1,6 +1,8 @@
-import {useAppSelector} from "../app/hooks.ts";
-import {selectHistory} from "../app/globalSlice.ts";
+import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
+import {fetchHistoryForSource, selectEndpoint, selectHistory} from "../app/globalSlice.ts";
 import {History} from "../model/ConsoleModels.ts";
+import {useEffect} from "react";
+import {Navigate} from "react-router-dom";
 
 export function HistoryRow({data}: {data: History}) {
     return (
@@ -16,6 +18,15 @@ export function HistoryRow({data}: {data: History}) {
 export default function HistoryList() {
     const history = useAppSelector(selectHistory);
     const historyPresent = history.length > 0;
+    const dispatch = useAppDispatch();
+    const source = useAppSelector(selectEndpoint);
+
+    useEffect(() => {
+        if (source) dispatch(fetchHistoryForSource(source));
+    }, [source, dispatch]);
+
+    if (!source) return <Navigate to='/' replace />
+
     return (
         <div className="flex flex-col w-full h-full">
             <div className="text-stone-900 text-3xl mb-4">Your mock request history</div>

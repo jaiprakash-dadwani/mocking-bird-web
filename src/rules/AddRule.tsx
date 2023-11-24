@@ -1,13 +1,16 @@
 import {useEffect, useState} from "react";
 import RuleRows, {RuleData} from "./RuleRows.tsx";
 import RuleResponse from "./RuleResponse.tsx";
+import {useAppDispatch} from "../app/hooks.ts";
+import {setCurrentRuleData} from "../app/globalSlice.ts";
 
 export default function AddRule() {
     const [ruleData, setRuleData] = useState<RuleData[]>([{}]);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        console.log(ruleData);
-    }, [ruleData]);
+        dispatch(setCurrentRuleData(ruleData));
+    }, [ruleData, dispatch]);
 
     const handleChange = (key: string, value: string, index: number) => {
         if (ruleData.length > index) {

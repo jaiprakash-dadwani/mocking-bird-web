@@ -5,6 +5,7 @@ import {ENDPOINTS} from "../constants.ts";
 import {Rule} from "../model/RulesModels.ts";
 import {History} from "../model/ConsoleModels.ts";
 import {getHistory, getRuleList} from "../MockData.ts";
+import {RuleData} from "../rules/RuleRows.tsx";
 
 export interface GlobalState {
     isLoading: boolean;
@@ -13,6 +14,7 @@ export interface GlobalState {
     rulesList: Rule[],
     currentRule: Partial<Rule>,
     history: History[],
+    currentRuleData: Partial<RuleData>[],
 }
 
 const initialState: GlobalState = {
@@ -22,6 +24,7 @@ const initialState: GlobalState = {
     rulesList: getRuleList(),
     currentRule: {},
     history: getHistory(),
+    currentRuleData: [],
 };
 
 export const globalSlice = createSlice({
@@ -38,7 +41,10 @@ export const globalSlice = createSlice({
             state.rulesList = action.payload;
         },
         setCurrentRule: (state, action: PayloadAction<Partial<Rule>>) => {
-            state.currentRule = action.payload;
+            state.currentRule = {...state.currentRule, ...action.payload};
+        },
+        setCurrentRuleData: (state, action: PayloadAction<Partial<RuleData>[]>) => {
+            state.currentRuleData = {...state.currentRuleData, ...action.payload};
         },
         setHistory: (state, action: PayloadAction<History[]>) => {
             state.history = action.payload;
@@ -51,7 +57,8 @@ export const globalSlice = createSlice({
 
 export const {
     setIsLoading, setAppSource, setSelectedEndPoint,
-    setRulesList, setCurrentRule, setHistory
+    setRulesList, setCurrentRule, setHistory,
+    setCurrentRuleData
 } = globalSlice.actions;
 
 export const selectIsLoading = (state: AppState) => state.global.isLoading;
@@ -60,6 +67,7 @@ export const selectEndpoint = (state: AppState) => state.global.endPoint;
 export const selectRulesList = (state: AppState) => state.global.rulesList;
 export const selectCurrentRule = (state: AppState) => state.global.currentRule;
 export const selectHistory = (state: AppState) => state.global.history;
+export const selectRulesData = (state: AppState) => state.global.currentRuleData;
 
 export const fetchApplicationSource = createAsyncThunk(
     'applicationSourceList',
