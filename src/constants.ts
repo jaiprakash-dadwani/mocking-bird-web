@@ -1,9 +1,9 @@
 export const ENDPOINTS = {
-    BASE_URL: 'http://localhost:8080',
-    SOURCE_LIST: 'v1/source',
-    RULES_LIST: 'v1/rules',
+    BASE_URL: 'http://localhost:8085',
+    SOURCE_LIST: 'v1/application-source',
+    RULES_LIST: 'v1/rule',
     PATCH_RULE: 'v1/rule/update',
-    HISTORY: 'v1/history',
+    HISTORY: 'v1/mock/history',
 }
 
 export default {};
