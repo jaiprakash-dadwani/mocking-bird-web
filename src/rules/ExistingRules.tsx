@@ -1,5 +1,5 @@
 import {useAppDispatch, useAppSelector} from "../app/hooks.ts";
-import {fetchRulesBySource, selectEndpoint, selectRulesList, setCurrentRule} from "../app/globalSlice.ts";
+import {fetchRulesBySource, patchRule, selectEndpoint, selectRulesList} from "../app/globalSlice.ts";
 import {Rule} from "../model/RulesModels.ts";
 import editIcon from '../assets/edit.svg';
 import tickIcon from '../assets/check.svg';
@@ -12,7 +12,7 @@ function ExistingRule({data, index}: {data: Rule, index: number}) {
     const dispatch = useAppDispatch();
 
     const handleClick = () => {
-        if (isEdit) dispatch(setCurrentRule({...data, response: textValue || data.response}))
+        if (isEdit) dispatch(patchRule({...data, response: textValue || data.response}))
         setEdit(!isEdit)
     }
 
