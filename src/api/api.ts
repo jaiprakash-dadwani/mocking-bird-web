@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { withExtractedData } from './apiUtils';
+import {ENDPOINTS} from "../constants.ts";
 
 const client = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: ENDPOINTS.BASE_URL
 });
 
 const {
